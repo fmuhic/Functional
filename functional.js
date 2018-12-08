@@ -87,8 +87,8 @@ module.exports = {
 
     // ____________________________________________________________________________
     // Desc:
-    //      Compose N functions (left to right) by applying each function to imput (x)
-    //      and redirect output to a next function.
+    //      Compose N functions (left to right).
+    //
     // Args:
     //      fs (Functions): Comma separated list of unary function,
     //                      except for the first function which can take arbitrary 
