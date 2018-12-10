@@ -1,6 +1,3 @@
-// USAGE: const F = require('./functional')
-
-
 // ____________________________________________________________________________
 // Desc:
 //      Allow function that takes multiple arguments to be called as sequence
@@ -14,7 +11,7 @@
 //
 // Example: 
 //      s = (a, b, c, c) => a + b + c + d
-//      sum = R.curry(s)
+//      sum = curry(s)
 //      // All invocations below will yield same result
 //      sum(1)(2)(3)(4)
 //      sum(1, 2)(3)(4)
@@ -44,8 +41,9 @@ curry = f => {
 //      Result (Num)
 //
 // Example: 
-//      const res = F.add(3)(7)
-//      res // 10
+//      const res = add(3)(7)
+//      const res = add(3, 7)
+//      // res is 10 in both cases
 //
 add = curry((x, y) => x + y);
 
@@ -61,8 +59,9 @@ add = curry((x, y) => x + y);
 //      Result (Num)
 //
 // Example: 
-//      const res = F.mult(3)(7)
-//      res // 21
+//      const res = mult(3)(7)
+//      const res = mult(3, 7)
+//      // res is 21 in both cases
 //
 mult = curry((x, y) => x * y);
 
@@ -78,8 +77,9 @@ mult = curry((x, y) => x * y);
 //      Result (Num)
 //
 // Example: 
-//      const res = F.mult(21)(7)
-//      res // 3
+//      const res = div(21)(7)
+//      const res = div(21, 7)
+//      // res is 3 in both cases
 //
 div = curry((x, y) => x / y);
 
@@ -94,8 +94,8 @@ div = curry((x, y) => x / y);
 //      Result (Num)
 //
 // Example: 
-//      const res = F.negate(10)
-//      res // -10
+//      const res = negate(10)
+//      // res is -10
 //
 negate = x => (-x);
 
@@ -110,8 +110,8 @@ negate = x => (-x);
 //      x
 //
 // Example: 
-//      const res = F.identity('javascript')
-//      res // 'javascript'
+//      const res = identity('javascript')
+//      // res is 'javascript'
 //
 identity = x => x;
 
@@ -129,8 +129,8 @@ identity = x => x;
 //      Result (Any)
 //
 // Example: 
-//      const res = F.pipe(F.add(10), F.mult(2), F.negate)(5)
-//      res // (((10 + 5) * 2) * -1) = 30
+//      const res = pipe(add(10), mult(2), div(3)(5)
+//      // res is calculated as (((10 + 5) * 2) / 3) = 10
 //
 pipe = (...fs) => fs.reduce((f, g) => (...xs) => g(f(...xs)));
 
