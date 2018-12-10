@@ -1,5 +1,38 @@
 // USAGE: const F = require('./functional')
 
+
+// ____________________________________________________________________________
+// Desc:
+//      Allow function that takes multiple arguments to be called as sequence
+//      of functions which take one or more arguments
+//
+// Args:
+//      fs (Functions): N-ary function
+//
+// Return:
+//      Result (Function)
+//
+// Example: 
+//      s = (a, b, c, c) => a + b + c + d
+//      sum = R.curry(s)
+//      // All invocations below will yield same result
+//      sum(1)(2)(3)(4)
+//      sum(1, 2)(3)(4)
+//      sum(1, 2, 3)(4)
+//      sum(1)(2, 3)(4)
+//      sum(1)(2, 3, 4)
+//
+curry = f => {
+    return (...xs) => {
+        if (xs.length === 0)
+            throw Error('Provide at least one parameter');
+        if (xs.length >= f.length)
+            return f(...xs);
+        return curry(f.bind(null, ...xs));
+    };
+};
+
+
 // Desc:
 //      Add 2 numbers.
 //
@@ -14,7 +47,7 @@
 //      const res = F.add(3)(7)
 //      res // 10
 //
-add = x => y => x + y;
+add = curry((x, y) => x + y);
 
 
 // ____________________________________________________________________________
@@ -31,7 +64,7 @@ add = x => y => x + y;
 //      const res = F.mult(3)(7)
 //      res // 21
 //
-mult = x => y => x * y;
+mult = curry((x, y) => x * y);
 
 
 // ____________________________________________________________________________
@@ -48,7 +81,7 @@ mult = x => y => x * y;
 //      const res = F.mult(21)(7)
 //      res // 3
 //
-div = x => y => x / y;
+div = curry((x, y) => x / y);
 
 
 // ____________________________________________________________________________
@@ -100,38 +133,6 @@ identity = x => x;
 //      res // (((10 + 5) * 2) * -1) = 30
 //
 pipe = (...fs) => fs.reduce((f, g) => (...xs) => g(f(...xs)));
-
-
-// ____________________________________________________________________________
-// Desc:
-//      Allow function that takes multiple arguments to be called as sequence
-//      of functions which take one or more arguments
-//
-// Args:
-//      fs (Functions): N-ary function
-//
-// Return:
-//      Result (Function)
-//
-// Example: 
-//      sum = (a, b, c, c) => a + b + c + d
-//      csum = R.curry(sum)
-//      // All invocations below will yield same result
-//      csum(1)(2)(3)(4)
-//      csum(1, 2)(3)(4)
-//      csum(1, 2, 3)(4)
-//      csum(1)(2, 3)(4)
-//
-curry = f => {
-    return (...xs) => {
-        if (xs.length === 0)
-            throw Error('Provide at least one parameter');
-        if (xs.length >= f.length)
-            return f(...xs);
-        return curry(f.bind(null, ...xs));
-    };
-};
-
 
 
 
