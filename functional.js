@@ -10,7 +10,7 @@
 //      Result (Function)
 //
 // Example: 
-//      s = (a, b, c, c) => a + b + c + d
+//      s = (a, b, c, d) => a + b + c + d
 //      sum = curry(s)
 //      // All invocations below will yield same result
 //      sum(1)(2)(3)(4)
@@ -18,6 +18,7 @@
 //      sum(1, 2, 3)(4)
 //      sum(1)(2, 3)(4)
 //      sum(1)(2, 3, 4)
+//      sum(1, 2, 3, 4)
 //
 curry = f => {
     return (...xs) => {
