@@ -166,12 +166,12 @@ map = curry((f, xs) => {
 
 // ____________________________________________________________________________
 // Desc:
-//      Iterate over iterable (Array, String, etc.) or Object,
+//      Iterate over Iterable (Array, String, etc.) or Object,
 //      and return all elements for which f(x) returns true.
 //
 // Args:
 //      f (Function): Predicate function used to test all values of Iterable or Object.
-//      xs (Array, String, Object ...): Iterable or Object over which we apply function f.
+//      xs (Function): Iterable or Object over which we apply function f.
 //
 // Return:
 //      Result (Iterable or Object depending on input)
@@ -180,36 +180,8 @@ map = curry((f, xs) => {
 //      const isNegative = (x) => x < 0;
 //      let res = filter(isNegative, [-1, 2, -3, 4, -5])
 //      // res is [-1, -3, -5]
-//      let res = map(isNegative, {'first': -1, 'second': 2, 'third': -3})
+//      let res = filter(isNegative, {'first': -1, 'second': 2, 'third': -3})
 //      // res is {'first': -1, 'third': -3}
-//
-map = curry((f, xs) => {
-    if (_isIterable(xs))
-        return _map(f, xs);
-    else if (_isObject(xs))
-        return _mapObject(f, xs);
-    else 
-        throw Error('Please provide Iterable or Object');
-})
-
-
-// ____________________________________________________________________________
-// Desc:
-//      Iterate over itreable (Array, String, etc.) or Object,
-//      and return all element for which f(x) returns true.
-//
-// Args:
-//      f (Function): Predicate function used to test all values in iterable or object.
-//      xs (Function): Iterable or object over which we apply function f.
-//
-// Return:
-//      Result (Iterable or Object depending on input)
-//
-// Example: 
-//      const res = filter(add(10), [1, 2, 3])
-//      // res is [11, 12, 13]
-//      const res = map(add(10), {'first': 1, 'second': 2, 'third': 3})
-//      // res is {'first': 11, 'second': 12, 'third': 13}
 //
 filter = curry((f, xs) => {
     if (_isIterable(xs))
