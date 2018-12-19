@@ -185,9 +185,9 @@ map = curry((f, xs) => {
 //
 map = curry((f, xs) => {
     if (_isIterable(xs))
-        return _filter(f, xs);
+        return _map(f, xs);
     else if (_isObject(xs))
-        return _filterObject(f, xs);
+        return _mapObject(f, xs);
     else 
         throw Error('Please provide Iterable or Object');
 })
@@ -295,6 +295,6 @@ module.exports = {
     'identity' : identity,
     'pipe'     : pipe,
     'curry'    : curry,
-    'map'    : map,
-    'filter'    : filter
+    'map'      : map,
+    'filter'   : filter
 }
