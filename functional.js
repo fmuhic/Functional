@@ -161,7 +161,7 @@ map = curry((f, xs) => {
         return _mapObject(f, xs);
     else 
         throw Error('Please provide Iterable or Object');
-})
+});
 
 
 // ____________________________________________________________________________
@@ -190,7 +190,7 @@ filter = curry((f, xs) => {
         return _filterObject(f, xs);
     else 
         throw Error('Please provide Iterable or Object');
-})
+});
 
 
 // ____________________________________________________________________________
@@ -207,7 +207,7 @@ _map = (f, xs) => {
     for(let i = 0; i < len; i++)
         result[i] = f(xs[i]);
     return result;
-}
+};
 
 _mapObject = (f, xs) => {
     let result = new Object();
@@ -215,7 +215,7 @@ _mapObject = (f, xs) => {
         if (xs.hasOwnProperty(key))
             result[key] = f(xs[key]);
     return result;
-}
+};
 
 _filter = (f, xs) => {
     let len = xs.length;
@@ -224,7 +224,7 @@ _filter = (f, xs) => {
         if(f(xs[i]))
             result.push(xs[i]);
     return result;
-}
+};
 
 _filterObject = (f, xs) => {
     let result = new Object();
@@ -233,19 +233,19 @@ _filterObject = (f, xs) => {
             if(f(xs[key]))
                 result[key] = xs[key];
     return result;
-}
+};
 
 _isIterable = (x) => {
     if (x == null)
         return false;
     return typeof x[Symbol.iterator] === 'function';
-}
+};
 
 _isObject = (x) => {
     if (x == null)
         return false;
     return typeof x === 'object';
-}
+};
 
 
 
@@ -269,4 +269,4 @@ module.exports = {
     'curry'    : curry,
     'map'      : map,
     'filter'   : filter
-}
+};
