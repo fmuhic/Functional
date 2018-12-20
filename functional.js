@@ -171,7 +171,7 @@ map = curry((f, xs) => {
 //
 // Args:
 //      f (Function): Predicate function used to test all values of Iterable or Object.
-//      xs (Function): Iterable or Object over which we apply function f.
+//      xs (Array, String, Object ...): Iterable or Object over which we apply function f.
 //
 // Return:
 //      Result (Iterable or Object depending on input)
@@ -191,6 +191,59 @@ filter = curry((f, xs) => {
     else 
         throw Error('Please provide Iterable or Object');
 });
+
+
+
+// ____________________________________________________________________________
+// Desc:
+//      foldl is a way to represent catamorphism. By accumulating values on the left side,
+//      it reduces Iterable to a single value. (See foldl in Haskell).
+//      See also foldr.
+//
+// Args:
+//      f (Function): Binary function used to reduce elements of Iterable.
+//      acc (Any): Default value. If Iterable is empty this value is returned.
+//      xs (Array, String ...): Iterable or Object we are reducing.
+//
+// Return:
+//      Result (Any)
+//
+// Example: 
+//      let res = foldl(add, 10, [1, 2, 3, 4, 5])
+//      // res = (((((10 + 1) + 2) + 3) + 4) + 5)
+//
+foldl = curry((f, acc, xs) => {
+    for(let i = 0; i < xs.length; i++)
+        acc = f(acc, xs[i]);
+    return acc;
+});
+
+
+// ____________________________________________________________________________
+// Desc:
+//      foldr is a way to represent catamorphism. By accumulating values on the right side,
+//      it reduces Iterable to a single value. (See foldr in Haskell).
+//      See also foldl.
+//
+// Args:
+//      f (Function): Binary function used to reduce elements of Iterable.
+//      acc (Any): Default value. If Iterable is empty this value is returned.
+//      xs (Array, String ...): Iterable or Object we are reducing.
+//
+// Return:
+//      Result (Any)
+//
+// Example: 
+//      let res = foldr(add, 10, [1, 2, 3, 4, 5])
+//      // res = (1 + (2 + (3 + (4 + (5 + 10)))))
+//
+foldr = curry((f, acc, xs) => {
+    for(let i = xs.length - 1; i >= 0; i--)
+        acc = f(xs[i], acc);
+    return acc;
+});
+
+
 
 
 // ____________________________________________________________________________
@@ -268,5 +321,7 @@ module.exports = {
     'pipe'     : pipe,
     'curry'    : curry,
     'map'      : map,
-    'filter'   : filter
+    'filter'   : filter,
+    'foldl'    : foldl,
+    'foldr'    : foldr
 };
