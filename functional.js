@@ -203,7 +203,7 @@ filter = curry((f, xs) => {
 // Args:
 //      f (Function): Binary function used to reduce elements of Iterable.
 //      acc (Any): Default value. If Iterable is empty this value is returned.
-//      xs (Array, String ...): Iterable or Object we are reducing.
+//      xs (Array, String ...): Iterable we are reducing.
 //
 // Return:
 //      Result (Any)
@@ -228,7 +228,7 @@ foldl = curry((f, acc, xs) => {
 // Args:
 //      f (Function): Binary function used to reduce elements of Iterable.
 //      acc (Any): Default value. If Iterable is empty this value is returned.
-//      xs (Array, String ...): Iterable or Object we are reducing.
+//      xs (Array, String ...): Iterable we are reducing.
 //
 // Return:
 //      Result (Any)
