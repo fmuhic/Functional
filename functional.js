@@ -301,6 +301,39 @@ any = curry((f, xs) => {
 
 
 // ____________________________________________________________________________
+// Desc:
+//      Calls function f with x and returns x. Useful when combined with pipe or
+//      in sitation when f performs side effects in general.
+//
+// Args:
+//      f (Function): Function we are calling 
+//      x (Any): Argument which will be passed to f.
+//
+// Return:
+//      x (Any)
+//
+// Example: 
+//      let print = (x) => console.log("Result = " + x)
+//      F.pipe(
+//          F.tap(print),
+//          F.map(F.add(1)),
+//          F.tap(print),
+//          F.map(F.negate),
+//          F.tap(print)
+//      )([1, 2, 3, 4])
+//
+//      // Console output:
+//          Result = 1,2,3,4     // First print
+//          Result = 2,3,4,5     // Second print, after adding 1 to each element
+//          Result = -2,-3,-4,-5 // Third print after negating each element
+//
+tap = curry((f, x) => {
+    f(x);
+    return x;
+});
+
+
+// ____________________________________________________________________________
 // ____________________________________________________________________________
 //
 //    PRIVATE
@@ -379,5 +412,7 @@ module.exports = {
     'foldl'    : foldl,
     'foldr'    : foldr,
     'all'      : all,
-    'any'      : any
+    'any'      : any,
+    'tap'      : tap
+
 };
