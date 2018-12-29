@@ -244,6 +244,60 @@ foldr = curry((f, acc, xs) => {
 });
 
 
+// ____________________________________________________________________________
+// Desc:
+//      Return true if function f returns true every time 
+//      when applied to each element of Iterable xs.
+//
+// Args:
+//      f (Function): Predicate function used to test all values of Iterable or Object.
+//      xs (Array, String ...): Iterable over which we apply function f.
+//
+// Return:
+//      Bool
+//
+// Example: 
+//      const isNegative = (x) => x < 0;
+//      const isEven = (x) => x % 2 == 0;
+//      let res = all(isNegative, [-1, -2, -3, -4, -5])
+//      // res is true
+//      let res = all(isEven)([2, 4, 8, 16, 20])
+//      // res is true
+//
+all = curry((f, xs) => {
+    for(x of xs)
+        if (!f(x))
+            return false;
+    return true;
+});
+
+
+// ____________________________________________________________________________
+// Desc:
+//      Return true if function f returns true atleast once
+//      when applied to each element of Iterable xs.
+//
+// Args:
+//      f (Function): Predicate function used to test all values of Iterable or Object.
+//      xs (Array, String ...): Iterable over which we apply function f.
+//
+// Return:
+//      Bool
+//
+// Example: 
+//      const isNegative = (x) => x < 0;
+//      const isEven = (x) => x % 2 == 0;
+//      let res = any(isNegative, [1, -2, 3, 4, 5])
+//      // res is true
+//      let res = any(isEven)([1, 4, 7, 13, 55])
+//      // res is true
+//
+any = curry((f, xs) => {
+    for(x of xs)
+        if (f(x))
+            return true;
+    return false;
+});
 
 
 // ____________________________________________________________________________
@@ -323,5 +377,7 @@ module.exports = {
     'map'      : map,
     'filter'   : filter,
     'foldl'    : foldl,
-    'foldr'    : foldr
+    'foldr'    : foldr,
+    'all'      : all,
+    'any'      : any
 };
