@@ -302,8 +302,8 @@ any = curry((f, xs) => {
 
 // ____________________________________________________________________________
 // Desc:
-//      Calls function f with x and returns x. Useful when combined with pipe or
-//      in sitation when f performs side effects in general.
+//      Calls function f with x and returns x. Useful in function composition
+//      when f performs side effects.
 //
 // Args:
 //      f (Function): Function we are calling 
@@ -314,12 +314,12 @@ any = curry((f, xs) => {
 //
 // Example: 
 //      let print = (x) => console.log("Result = " + x)
-//      F.pipe(
-//          F.tap(print),
-//          F.map(F.add(1)),
-//          F.tap(print),
-//          F.map(F.negate),
-//          F.tap(print)
+//      pipe(
+//          tap(print),
+//          map(add(1)),
+//          tap(print),
+//          map(negate),
+//          tap(print)
 //      )([1, 2, 3, 4])
 //
 //      // Console output:
